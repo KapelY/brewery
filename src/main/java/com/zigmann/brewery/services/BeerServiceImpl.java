@@ -24,7 +24,6 @@ public class BeerServiceImpl implements BeerService {
         return BeerDto.builder()
                 .id(UUID.randomUUID())
                 .build();
-
     }
 
     @Override
