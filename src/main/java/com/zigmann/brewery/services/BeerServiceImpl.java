@@ -1,10 +1,12 @@
 package com.zigmann.brewery.services;
 
 import com.zigmann.brewery.web.model.BeerDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class BeerServiceImpl implements BeerService {
     @Override
@@ -30,4 +32,10 @@ public class BeerServiceImpl implements BeerService {
         // todo update beer
     }
 
+
+    @Override
+    public void deleteById() {
+        // todo delete beer
+        log.debug("Deleting beer...");
+    }
 }
