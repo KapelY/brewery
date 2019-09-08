@@ -2,6 +2,7 @@ package com.zigmann.brewery.web.controller;
 
 import com.zigmann.brewery.services.BeerService;
 import com.zigmann.brewery.web.model.BeerDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,18 +16,17 @@ public class BeerController {
 
     private final BeerService beerService;
 
-//    @Autowired
     public BeerController(BeerService beerService) {
         this.beerService = beerService;
     }
 
-    @GetMapping({"/{beerId}"})
-    public ResponseEntity<BeerDto> getBeer(@PathVariable("beerId") UUID id) {
+    @GetMapping("/{beerId}")
+    public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID id) {
         return new ResponseEntity<>(beerService.getBeerById(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity handlePost(@RequestBody BeerDto beerDto) {
+    public ResponseEntity saveNewBeer(@RequestBody BeerDto beerDto) {
         BeerDto saveBeerDto = beerService.saveNewBeer(beerDto);
 
         HttpHeaders headers = new HttpHeaders();
@@ -37,16 +37,16 @@ public class BeerController {
     }
 
     @PutMapping({"/{beerId}"})
-    public ResponseEntity handleUpdate(@PathVariable("beerId") UUID beerId,@RequestBody BeerDto beerDto) {
+    public ResponseEntity updateBeerById(@PathVariable("beerId") UUID beerId, @RequestBody BeerDto beerDto) {
 
-        beerService.updateBeer(beerId, beerDto);
+        beerService.updateBeerById(beerId, beerDto);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping({"/{beerId}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteBeer(@PathVariable UUID beerId) {
+    public void deleteBeerById(@PathVariable UUID beerId) {
         beerService.deleteById();
     }
 }
